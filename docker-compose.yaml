@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - 3003:3003
+    volumes:
+      - .:/home/node/app
+    environment:
+      DATABASE_URL: postgresql://prisma:prisma@db:5432/facilita_db
+  
+  web:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/web
+    
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: facilita_db
+    ports:
+      - 5433:5432
